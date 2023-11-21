@@ -62,7 +62,7 @@ df.replace({'prognosis':{'Fungal infection':0,'Allergy':1,'GERD':2,'Chronic chol
 # Distribution graphs (histogram/bar graph) of column data
 def plotPerColumnDistribution(df1, nGraphShown, nGraphPerRow):
     nunique = df1.nunique()
-    df1 = df1[[col for col in df if nunique[col] > 1 and nunique[col] < 50]] # For displaying purposes, pick columns that have between 1 and 50 unique values
+    df1 = df1[[col for col in df if nunique[col] > 1 and nunique[col] < 50]]
     nRow, nCol = df1.shape
     columnNames = list(df1)
     nGraphRow = (nCol + nGraphPerRow - 1) / nGraphPerRow
@@ -406,33 +406,29 @@ def NaiveBayes():
          #printing scatter plot of disease predicted vs its symptoms
         scatterplt(pred3.get())
         
-#Tk class is used to create a root window
 root.configure(background='Ivory')
 root.title('Smart Disease Predictor System')
 root.resizable(0,0)
 
-#taking first input as symptom
 Symptom1 = StringVar()
 Symptom1.set("Select Here")
 
-#taking second input as symptom
 Symptom2 = StringVar()
 Symptom2.set("Select Here")
 
-#taking third input as symptom
 Symptom3 = StringVar()
 Symptom3.set("Select Here")
 
-#taking fourth input as symptom
+
 Symptom4 = StringVar()
 Symptom4.set("Select Here")
 
-#taking fifth input as symptom
+
 Symptom5 = StringVar()
 Symptom5.set("Select Here")
 Name = StringVar()
 
-#function to Reset the given inputs to initial position
+# reset button
 prev_win=None
 def Reset():
     global prev_win
@@ -455,7 +451,7 @@ def Reset():
     except AttributeError:
         pass
     
-#Exit button to come out of system
+#Exit button
 from tkinter import messagebox
 def Exit():
     qExit=messagebox.askyesno("System","Do you want to exit the system")
@@ -463,20 +459,20 @@ def Exit():
         root.destroy()
         exit()
         
-#Headings for the GUI written at the top of GUI
-w2 = Label(root, justify=LEFT, text="Disease Predictor using Machine Learning", fg="Red", bg="Ivory")
+
+w2 = Label(root, justify=LEFT, text="Disease Prediction using Machine Learning", fg="Red", bg="Ivory")
 w2.config(font=("Times",30,"bold italic"))
 w2.grid(row=1, column=0, columnspan=2, padx=100)
 w2 = Label(root, justify=LEFT, text="Contributors: Ansh,Ayan,Prakher", fg="Pink", bg="Ivory")
 w2.config(font=("Times",30,"bold italic"))
 w2.grid(row=2, column=0, columnspan=2, padx=100)
 
-#Label for the name
+# Patient Name input
 NameLb = Label(root, text="Name of the Patient", fg="Red", bg="Ivory")
 NameLb.config(font=("Times",15,"bold italic"))
 NameLb.grid(row=6, column=0, pady=15, sticky=W)
 
-#Creating Labels for the symtoms
+#labels for the symtoms
 S1Lb = Label(root, text="Symptom 1", fg="Black", bg="Ivory")
 S1Lb.config(font=("Times",15,"bold italic"))
 S1Lb.grid(row=7, column=0, pady=10, sticky=W)
@@ -497,7 +493,7 @@ S5Lb = Label(root, text="Symptom 5", fg="Black", bg="Ivory")
 S5Lb.config(font=("Times",15,"bold italic"))
 S5Lb.grid(row=11, column=0, pady=10, sticky=W)
 
-#Labels for the different algorithms
+#labels for different algorithms
 lrLb = Label(root, text="DecisionTree", fg="white", bg="red", width = 20)
 lrLb.config(font=("Times",15,"bold italic"))
 lrLb.grid(row=15, column=0, pady=10,sticky=W)
@@ -515,11 +511,11 @@ knnLb.config(font=("Times",15,"bold italic"))
 knnLb.grid(row=21, column=0, pady=10, sticky=W)
 OPTIONS = sorted(l1)
 
-#Taking name as input from user
+#taking input patient name
 NameEn = Entry(root, textvariable=Name)
 NameEn.grid(row=6, column=1)
 
-#Taking Symptoms as input from the dropdown from the user
+#symptoms input
 S1 = OptionMenu(root, Symptom1,*OPTIONS)
 S1.grid(row=7, column=1)
 
@@ -535,7 +531,7 @@ S4.grid(row=10, column=1)
 S5 = OptionMenu(root, Symptom5,*OPTIONS)
 S5.grid(row=11, column=1)
 
-#Buttons for predicting the disease using different algorithms
+#Buttons
 dst = Button(root, text="Prediction 1", command=DecisionTree,bg="Red",fg="yellow")
 dst.config(font=("Times",15,"bold italic"))
 dst.grid(row=6, column=3,padx=10)
@@ -560,7 +556,7 @@ ex = Button(root,text="Exit System", command=Exit,bg="yellow",fg="purple",width=
 ex.config(font=("Times",15,"bold italic"))
 ex.grid(row=11,column=3,padx=10)
 
-#Showing the output of different algorithms
+#output
 t1=Label(root,font=("Times",15,"bold italic"),text="Decision Tree",height=1,bg="Light green"
          ,width=40,fg="red",textvariable=pred1,relief="sunken").grid(row=15, column=1, padx=10)
 
@@ -573,7 +569,6 @@ t3=Label(root,font=("Times",15,"bold italic"),text="Naive Bayes",height=1,bg="re
 t4=Label(root,font=("Times",15,"bold italic"),text="kNearest Neighbour",height=1,bg="Blue"
          ,width=40,fg="yellow",textvariable=pred4,relief="sunken").grid(row=21, column=1, padx=10)
 
-#calling this function because the application is ready to run
 root.mainloop()
 
 
